@@ -22,6 +22,58 @@ function formatDate(timestamp) {
   return `${day}, ${hours}:${minutes}`;
 }
 
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "wed", "Thur", "Fri", "Sat"];
+
+  return days[day];
+}
+
+function displayForecast(response) {
+  let forecast = response.data.daily;
+
+  let forecastElement = document.querySelector("#forecast");
+
+  let forecastHTML = `<div class="row">`;
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `
+      <div class="col-2">
+                <div class="weather-date">${formatDay(forecastDay.dt)}</div>
+                <img
+                  src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${
+                    forecastDay.weather[0].icon
+                  }.png"
+                  alt=""
+                  width="45"
+                />
+                <div class="weather-temperature">
+                  <span class="weather-temperature-max"> ${Math.round(
+                    forecastDay.temp.max
+                  )}° </span>
+                  <span class="weather-temperature-min"> ${Math.round(
+                    forecastDay.temp.min
+                  )}° </span>
+                   </div>
+                </div> 
+                `;
+    }
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+function getForecast(coordinates) {
+  console.log(coordinates);
+  let apiKey = `ao770b50a60t1fd360c4ff3be2bdaa6e`;
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${coordinates.lon}&lat=${coordinates.lat}&key=${apiKey}&units=metric`;
+  console.log(apiUrl);
+  axios.get(apiUrl).then(displayForecast);
+}
+
 function currentTemperature(response) {
   let temperatureElement = document.querySelector("#temperature");
   let areaElement = document.querySelector("#area");
@@ -44,10 +96,12 @@ function currentTemperature(response) {
   );
 
   iconViewElement.setAttribute("alt", response.data.weather[0].icon);
+
+  getForecast(response.data.coord);
 }
 
 function search(city) {
-  let apiKey = `0dbe12992e5d53586af614683d709376`;
+  let apiKey = "0dbe12992e5d53586af614683d709376";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
   axios.get(apiUrl).then(currentTemperature);
