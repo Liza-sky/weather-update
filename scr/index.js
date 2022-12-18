@@ -101,8 +101,9 @@ function currentTemperature(response) {
 }
 
 function search(city) {
-  let apiKey = "0dbe12992e5d53586af614683d709376";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  let apiKey = `ao770b50a60t1fd360c4ff3be2bdaa6e`;
+
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
 
   axios.get(apiUrl).then(currentTemperature);
 }
