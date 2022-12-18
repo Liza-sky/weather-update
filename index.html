@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+
+    <link rel="stylesheet" href="/src/index.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="whole-weather">
+        <div class="weather-app">
+          <div class="container">
+            <nav class="navbar bg-light">
+              <div class="container-fluid">
+                <form class="d-flex" id="search-form" role="search">
+                  <input
+                    class="form-control me-4"
+                    type="search"
+                    placeholder="Search City"
+                    id="city-input"
+                    autocomplete="off"
+                  />
+                  <button class="btn btn-outline-primary" type="submit">
+                    submit
+                  </button>
+                </form>
+              </div>
+            </nav>
+          </div>
+
+          <h1 id="area">Nairobi</h1>
+
+          <div id="date">Saturday 21:30</div>
+          <div id="condition">Sunny</div>
+
+          <div class="container">
+            <div class="row">
+              <div class="col-6">
+                <div class="clearfix weather-temperature">
+                  <img
+                    src=" http://openweathermap.org/img/wn/10d@2x.png"
+                    alt="clear"
+                    class="icon"
+                    id="icon-view"
+                    width="65"
+                  />
+                  <div class="icon">
+                    <strong class="unit" id="temperature">12</strong
+                    ><small class="degree"
+                      >℃/<a href="" id="fahrenheit">℉</a>
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <ul>
+                  <li>Humidity: <span id="humidity">78</span>%</li>
+                  <li>Precepitation: 12%</li>
+                  <li>Wind Speed: <span id="speed">5</span> km/h</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="weather-forecast" id="forecast"></div>
+        </div>
+
+        <small>
+          <a href="" target="_blank">Open-source code</a>
+          by Elizabeth Waringa
+        </small>
+      </div>
+    </div>
+
+    <script src="src/index.js"></script>
+  </body>
+</html>
